@@ -23,6 +23,7 @@ $ sudo cp termcolors.py /usr/local/bin/termcolors
 Then call from anywhere:
 $ termcolors
 
+```
   =========================
    1) autumn
    2) baskerville
@@ -45,7 +46,7 @@ $ termcolors
   Current theme is: mnml
   
   Enter number of selection: 
-
+```
 
 ### TODO: ###
     - browse and preview themes from dotshare.it
