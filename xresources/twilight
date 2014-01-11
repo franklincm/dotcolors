@@ -1,28 +1,28 @@
 !   black / dark gray
-URxvt*color0: #4D4D4D
-URxvt*color8: #9E9E9E
+*color0: #4D4D4D
+*color8: #9E9E9E
 !   red
-URxvt*color1: #725631
-URxvt*color9: #AC885B
+*color1: #725631
+*color9: #AC885B
 !   green
-URxvt*color2: #5F6C3F
-URxvt*color10: #8F9D6A
+*color2: #5F6C3F
+*color10: #8F9D6A
 !   yellow
-URxvt*color3: #757575
-URxvt*color11: #B8B8B8
+*color3: #757575
+*color11: #B8B8B8
 !   blue
-URxvt*color4: #39598E
-URxvt*color12: #7587A6
+*color4: #39598E
+*color12: #7587A6
 !   magenta
-URxvt*color5: #713B71
-URxvt*color13: #9B859D
+*color5: #713B71
+*color13: #9B859D
 !   cyan
-URxvt*color6: #404040
-URxvt*color14: #404040
+*color6: #404040
+*color14: #404040
 !   light gray / white
-URxvt*color7: #B8B8B8
-URxvt*color15: #757575
+*color7: #B8B8B8
+*color15: #757575
 ! [ urxvt ]
-URxvt*background: [90]#141414
-URxvt*foreground: #F8F8F8
-URxvt*cursorColor: #404040
+*background: [90]#141414
+*foreground: #F8F8F8
+*cursorColor: #404040

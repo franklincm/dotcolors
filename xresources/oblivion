@@ -1,4 +1,4 @@
-URxvt*background: [90]#222222
+*background: [90]#222222
 *foreground:	#ffffff
 *background: 	#222222
 //Spring

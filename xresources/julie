@@ -1,4 +1,4 @@
-URxvt*background: [90]#151515
+*background: [90]#151515
 *foreground: #c6a57b
 *background: #151515
 !black

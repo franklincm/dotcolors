@@ -23,7 +23,7 @@ urxvt*background: [90]#151515
 !white
 *color7:    #DBDCDC
 *color15:  #FDFDFD
-URxvt*borderColor:        #151515
-URxvt*colorBD:            #ffffff
-URxvt*cursorColor:        #ff8939
-URxvt*cursorColor2:       #151515
+*borderColor:        #151515
+*colorBD:            #ffffff
+*cursorColor:        #ff8939
+*cursorColor2:       #151515

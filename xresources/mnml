@@ -1,56 +1,56 @@
 ! TABS COLOURS
-! URxvt.color0  : #979797
-! URxvt.color1  : #000000
+! .color0  : #979797
+! .color1  : #000000
 
 ! TERMINAL COLOURS
-URxvt*foreground: #D3D3D3
-URxvt*background: [80]#111111
+*foreground: #D3D3D3
+*background: [80]#111111
 !black
-URxvt*color0: #181818
-URxvt*color8: #181818
+*color0: #181818
+*color8: #181818
 !red
-URxvt*color1: #D7D7D7
-URxvt*color9: #D7D7D7
+*color1: #D7D7D7
+*color9: #D7D7D7
 !green
-URxvt*color2: #AADB0F
-URxvt*color10: #AADB0F
+*color2: #AADB0F
+*color10: #AADB0F
 !yellow
-URxvt*color3: #666666
-URxvt*color11: #666666
+*color3: #666666
+*color11: #666666
 !blue
-URxvt*color4: #FFFFFF
-URxvt*color12: #FFFFFF
+*color4: #FFFFFF
+*color12: #FFFFFF
 !magenta
-URxvt*color5: #91BA0D
-URxvt*color13: #91BA0D
+*color5: #91BA0D
+*color13: #91BA0D
 !cyan
-URxvt*color6: #D4D4D4
-URxvt*color14: #D4D4D4
+*color6: #D4D4D4
+*color14: #D4D4D4
 !white
-URxvt*color7: #D3D3D3
-URxvt*color15: #D3D3D3
+*color7: #D3D3D3
+*color15: #D3D3D3
 
 ! SETTINGS
-URxvt*scrollBar: False
-! URxvt*scrollColor: #8FF528
-! URxvt*troughColor: #222222
-URxvt*secondaryScroll: True
-URxvt*saveLines: 1000
-URxvt.cursorUnderline: False
-URxvt*cursorColor: #D3D3D3
-URxvt.cursorBlink: True
-URxvt*underlineColor: #181818
-! URxvt*depth: 32
-! URxvt*transparent: True
-! URxvt*borderColor: #C2FFA0
+*scrollBar: False
+! *scrollColor: #8FF528
+! *troughColor: #222222
+*secondaryScroll: True
+*saveLines: 1000
+.cursorUnderline: False
+*cursorColor: #D3D3D3
+.cursorBlink: True
+*underlineColor: #181818
+! *depth: 32
+! *transparent: True
+! *borderColor: #C2FFA0
 
 ! CLICKABLE LINKS
-URxvt.perl-ext-common:      default,matcher
-URxvt.matcher.button:       1
-URxvt.urlLauncher:          x-www-browser
+.perl-ext-common:      default,matcher
+.matcher.button:       1
+.urlLauncher:          x-www-browser
 
 ! TABS SETTINGS
-! URxvt.tabbed.tabbar-fg: 1
-! URxvt.tabbed.tabbar-bg: 0
-! URxvt.tabbed.tab-fg:    1
-! URxvt.tabbed.tab-bg:    0
+! .tabbed.tabbar-fg: 1
+! .tabbed.tabbar-bg: 0
+! .tabbed.tab-fg:    1
+! .tabbed.tab-bg:    0

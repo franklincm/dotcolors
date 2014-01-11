@@ -24,8 +24,8 @@
 !white
 *color7:     #dddddd
 *color15:    #dddddd
-URxvt*background:	  [80]#151515
-URxvt*borderColor:        #151515
-URxvt*colorBD:            #ffffff
-URxvt*cursorColor:        #ff8939
-URxvt*cursorColor2:       #151515
+*background:	  [80]#151515
+*borderColor:        #151515
+*colorBD:            #ffffff
+*cursorColor:        #ff8939
+*cursorColor2:       #151515
