@@ -4,24 +4,24 @@ A simple script to quickly switch between color themes in urxvt.
 
 ## Setup ##
 1. Requires 'xrdb'
-2. Theme files are .Xresources format, should be located in ~/.config/xresources/ and have no file extensions.
+2. Theme files are .Xresources format, should be located in ~/.config/xresources/ and have no file extensions. Have a look in xresources/ for some examples.
 3. Remove all color settings from ~/.Xresources
 4. (optionally) add to path
 
 Included are some themes I like from http://dotshare.it
 
 
-$mkdir -p ~/.config/xresources
-$cp xresources/* ~/.config/xresources/
+$ mkdir -p ~/.config/xresources
+$ cp xresources/* ~/.config/xresources/
 
 ## Usage ##
 Personally, I make the script executeable and keep in /usr/local/bin:
 
-$chmod + termcolors.py
-$sudo cp termcolors.py /usr/local/bin/termcolors
+$ chmod + termcolors.py
+$ sudo cp termcolors.py /usr/local/bin/termcolors
 
 Then call from anywhere:
-$termcolors
+$ termcolors
 
   =========================
    1) autumn
