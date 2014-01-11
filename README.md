@@ -16,9 +16,9 @@ $ cp xresources/* ~/.config/xresources/
 ```
 
 ## Usage ##
-Personally, I make the script executeable and keep in /usr/local/
+Personally, I make the script executeable and keep in /usr/local/bin/
 ```
-$ chmod + termcolors.py
+$ chmod +x termcolors.py
 $ sudo cp termcolors.py /usr/local/bin/termcolors
 ```
 
