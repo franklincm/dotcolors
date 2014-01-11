@@ -10,18 +10,22 @@ A simple script to quickly switch between color themes in urxvt.
 
 Included are some themes I like from http://dotshare.it
 
-
+```
 $ mkdir -p ~/.config/xresources
 $ cp xresources/* ~/.config/xresources/
+```
 
 ## Usage ##
-Personally, I make the script executeable and keep in /usr/local/bin:
-
+Personally, I make the script executeable and keep in /usr/local/
+```
 $ chmod + termcolors.py
 $ sudo cp termcolors.py /usr/local/bin/termcolors
+```
 
 Then call from anywhere:
+```
 $ termcolors
+```
 
 ```
   =========================
