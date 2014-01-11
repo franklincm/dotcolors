@@ -1,0 +1,21 @@
+#termcolors.py
+
+A simple script to quickly switch between color themes in urxvt.
+
+##Setup
+1. Requires 'xrdb'
+2. Theme files are .Xresources format, should be located in ~/.config/xresources/ and have no file extensions.
+3. Remove all color settings from ~/.Xresources
+
+
+Included are some themes I like from http://dotshare.it
+
+```
+mkdir -p ~/.config/xresources
+cp xresources/* ~/.config/xresources/
+```
+
+TODO:
+    - browse and preview themes from dotshare.it
+    - download and auto format themefiles
+    - adjust transparency setting in themefiles
