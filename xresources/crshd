@@ -1,5 +1,5 @@
 *foreground: #D7D0C7
-*background: #151515
+*background: [80]#151515
 !black
 *color0:     #101010
 *color8:     #404040
@@ -24,7 +24,6 @@
 !white
 *color7:     #dddddd
 *color15:    #dddddd
-*background:	  [80]#151515
 *borderColor:        #151515
 *colorBD:            #ffffff
 *cursorColor:        #ff8939
