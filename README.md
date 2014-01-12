@@ -6,15 +6,15 @@ By keeping persistent settings in .Xresources (font, perl-extenstions, behavior,
 
 ## Setup ##
 1. Requires 'xrdb'
-2. Theme files are .Xresources format, should be located in ~/.config/xresources/ and have no file extensions. Have a look in xresources/ for some examples.
+2. Theme files are .Xresources format, should be located in ~/.config/termcolors/themes and have no file extensions. Have a look in themes/ for some examples.
 3. Remove all color settings from ~/.Xresources if present
 4. (optionally) add to path
 
 Included are some themes I like from http://dotshare.it
 
 ```
-$ mkdir -p ~/.config/xresources
-$ cp xresources/* ~/.config/xresources/
+$ mkdir -p ~/.config/termcolors/themes
+$ cp -r themes/ ~/.config/termcolors/
 ```
 
 ## Usage ##
@@ -55,6 +55,7 @@ $ termcolors
 ```
 
 ### TODO: ###
+    - select theme directory
     - auto format themefiles
     - adjust transparency setting in themefiles
     - PyPI

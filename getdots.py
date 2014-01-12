@@ -11,7 +11,7 @@ from os.path import expanduser
 from progressbar import Percentage, Bar, ETA, ProgressBar, AnimatedMarker
 
 HOME = expanduser('~')
-THEMEDIR = HOME + '/.config/xresources/tmp/'
+THEMEDIR = HOME + '/.config/termcolors/'
 
 
 def get_pages():

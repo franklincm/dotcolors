@@ -1,11 +1,17 @@
 #!/usr/bin/env python2
-import os, re, sys, tempfile, subprocess
+
+import os
+import re
+import sys
+import tempfile
+import subprocess
+
 from shutil import move
 from os.path import expanduser, exists
 
 home = expanduser('~')
 themefile = home + '/.termcolors'
-themedir = home + '/.config/xresources'
+themedir = home + '/.config/termcolors'
 
 def get_current():
     """return current Xresources color theme"""
