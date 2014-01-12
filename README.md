@@ -55,5 +55,7 @@ $ termcolors
 ```
 
 ### TODO: ###
-    - download and auto format themefiles
+    - progress bar for theme downloads
+    - auto format themefiles
     - adjust transparency setting in themefiles
+    - PyPI
