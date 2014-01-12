@@ -55,6 +55,5 @@ $ termcolors
 ```
 
 ### TODO: ###
-    - browse and preview themes from dotshare.it
     - download and auto format themefiles
     - adjust transparency setting in themefiles
