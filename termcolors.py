@@ -78,7 +78,7 @@ def write_changes(current, selection):
         new.close()
         move(tmpfile, home + '/.termcolors')
 
-    #check for xrdb and apply if found
+    #check for xrdb and apply
     proc = subprocess.Popen(["which", "xrdb"], stdout=subprocess.PIPE)
     tmp = proc.stdout.read()
 
