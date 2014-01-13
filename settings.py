@@ -20,15 +20,15 @@ TEXT = """
 #
 # Add this to your .xinitrc or .xprofile:
 #
-#    sh ~/.termcolorsrc
+#    sh ~/.termcolorsrc &
 #
 
 termcolors_THEMEDIR='~/.config/termcolors/'
 
-xrdb -load %s** Not Set **
+xrdb -load ~/.config/termcolors/** Not Set **
 xrdb -merge ~/.Xresources 
 
-""" % (THEMEDIR)
+"""
 
 
 def set_rcfile():
@@ -46,6 +46,8 @@ def gset_themes_dir():
         if( len(themes_dir) > 0 ):
             themes_dir = expanduser( themes_dir )
         else:
+            print "Theme directory not set, using default:\n"
+            print "~/.config/termcolors/\n"
             themes_dir = expanduser( "~/.config/termcolors/" )
 
 
@@ -58,4 +60,4 @@ def gset_themes_dir():
 
 if __name__ == '__main__':
     set_rcfile()
-    set_themes_dir()
+    gset_themes_dir()
