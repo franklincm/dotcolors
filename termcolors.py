@@ -54,6 +54,48 @@ def menu_pages(colors, page=1):
     print 'Current theme is: %s\n' % get_current()
 
 
+def getch_selection(colors):
+    """prompt for selection, validate input, return selection"""
+    page = 1
+
+    getch = _Getch()
+
+    valid = False
+    while valid == False:
+        menu_pages(colors, page)
+
+        char = getch()
+        
+        if( char.lower() == 'n' ):
+            page += 1
+            menu_pages(colors, page)
+
+
+        if( char.lower() == 'p' ):
+            if(page > 1):
+                page -= 1
+            else:
+                page = 1
+            menu_pages(colors, page)
+
+
+        if( char.lower() == 's' ):
+            entry = raw_input("Enter number of selection: ")
+            try:
+                entry = int(entry)
+                if colors[entry - 1]:
+                    valid = True
+            except:
+                menu_pages(get_colors())
+                print "Not a valid integer."
+
+        if( char.lower() == 'q' ):
+            c = os.system('clear')
+            sys.exit(0)
+
+    return colors[entry - 1]
+
+
 def menu(colors):
     """return menu items from list: colors """
     c = os.system('clear')
@@ -132,7 +174,7 @@ if __name__ == '__main__':
         colors = get_colors()
 
         current = get_current()
-        selection = get_selection(colors)
+        selection = getch_selection(colors)
         write_changes(current, selection)
         
     except KeyboardInterrupt:
