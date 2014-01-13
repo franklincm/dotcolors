@@ -16,6 +16,7 @@ from os.path import exists
 HOME = expanduser('~')
 SETTINGSFILE = HOME + '/.termcolorsrc'
 THEMEDIR = HOME + '/.config/termcolors'
+RESULTS_PER_PAGE = 25
 
 def get_current():
     """return current Xresources color theme"""
@@ -43,32 +44,50 @@ def get_colors():
         sys.exit(0)
 
 
-def menu_pages(colors, page=1):
+def menu_pages(colors, page=1, print_keys=True):
     """return menu items by page from list: colors"""
     c = os.system('clear')
     print '=' * 25
+
     start = 25 * (page - 1)
+
     for i,v in enumerate(colors[start:start+25]):
         print '%2d) %s' % (i+start+1, v)
     print '=' * 25
-    print 'Current theme is: %s\n' % get_current()
+    print 'Current theme is: %s' % get_current()
+    
+    keys = """
+    N (n) - Next Page
+    P (p) - Previous Page
+    S (s) - Make Selection
+    Q (q) - Quit
+    """
+    if(print_keys):
+        print keys
 
 
 def getch_selection(colors):
     """prompt for selection, validate input, return selection"""
     page = 1
+    length = len(colors)
+    last_page = length / RESULTS_PER_PAGE
+    
+    if (last_page * RESULTS_PER_PAGE) < length:
+        last_page += 1
 
     getch = _Getch()
 
     valid = False
     while valid == False:
-        menu_pages(colors, page)
+        menu_pages(colors, page, True)
 
         char = getch()
         
         if( char.lower() == 'n' ):
             page += 1
-            menu_pages(colors, page)
+            if page > last_page:
+                page = last_page
+            menu_pages(colors, page, True)
 
 
         if( char.lower() == 'p' ):
@@ -76,7 +95,7 @@ def getch_selection(colors):
                 page -= 1
             else:
                 page = 1
-            menu_pages(colors, page)
+            menu_pages(colors, page, True)
 
 
         if( char.lower() == 's' ):
@@ -86,7 +105,7 @@ def getch_selection(colors):
                 if colors[entry - 1]:
                     valid = True
             except:
-                menu_pages(get_colors())
+                menu_pages(colors, page, True)
                 print "Not a valid integer."
 
         if( char.lower() == 'q' ):
@@ -175,7 +194,8 @@ if __name__ == '__main__':
 
         current = get_current()
         selection = getch_selection(colors)
-        write_changes(current, selection)
+        print selection
+#        write_changes(current, selection)
         
     except KeyboardInterrupt:
         sys.exit(0)
