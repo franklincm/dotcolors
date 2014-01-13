@@ -8,12 +8,13 @@ import sys
 import tempfile
 import subprocess
 
+from getch import _Getch
 from shutil import move
 from os.path import expanduser
 from os.path import exists
 
 HOME = expanduser('~')
-SETTINGSFILE = HOME + '/.termcolors'
+SETTINGSFILE = HOME + '/.termcolorsrc'
 THEMEDIR = HOME + '/.config/termcolors'
 
 def get_current():
@@ -41,6 +42,18 @@ def get_colors():
         print "First create ~/.config/xresources and place themefiles within."
         sys.exit(0)
 
+
+def menu_pages(colors, page=1):
+    """return menu items by page from list: colors"""
+    c = os.system('clear')
+    print '=' * 25
+    start = 25 * (page - 1)
+    for i,v in enumerate(colors[start:start+25]):
+        print '%2d) %s' % (i+start+1, v)
+    print '=' * 25
+    print 'Current theme is: %s\n' % get_current()
+
+
 def menu(colors):
     """return menu items from list: colors """
     c = os.system('clear')
@@ -52,6 +65,8 @@ def menu(colors):
 
 def get_selection(colors):
     """prompt for selection, validate input, return selection"""
+    page = 1
+    menu_pages(colors, page)
     valid = False
     while valid == False:
         entry = raw_input("Enter number of selection: ")
@@ -64,8 +79,18 @@ def get_selection(colors):
                 if entry.lower() == 'q':
                     c = os.system('clear')
                     sys.exit(0)
-            menu(get_colors())
-            print "Not a valid integer."
+                elif entry.lower() == 'n':
+                    page += 1
+                    menu_pages(get_colors(), page)
+                elif entry.lower() == 'p':
+                    if page > 1:
+                        page -= 1
+                    else:
+                        page = 1
+                    menu_pages(get_colors(), page)
+                else:
+                    menu_pages(get_colors())
+                    print "Not a valid integer."
     return colors[entry - 1]
 
 def write_changes(current, selection):
@@ -105,7 +130,7 @@ def write_changes(current, selection):
 if __name__ == '__main__':
     try:
         colors = get_colors()
-        menu(colors)
+
         current = get_current()
         selection = get_selection(colors)
         write_changes(current, selection)
