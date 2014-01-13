@@ -9,6 +9,8 @@ By keeping persistent settings in .Xresources (font, perl-extenstions, behavior,
 2. Theme files are .Xresources format, should be located in ~/.config/termcolors/themes and have no file extensions. Have a look in themes/ for some examples.
 3. Remove all color settings from ~/.Xresources if present
 4. (optionally) add to path
+**ignore settings.py and getdots.py for now**
+
 
 Included are some themes I like from http://dotshare.it
 
