@@ -57,7 +57,8 @@ $ termcolors
 ```
 
 ### TODO: ###
-    - select theme directory
+    - docopts
+    - limit number of themes downloaded
     - auto format themefiles
     - adjust transparency setting in themefiles
     - PyPI

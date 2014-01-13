@@ -11,10 +11,10 @@ from BeautifulSoup import BeautifulSoup
 from os.path import expanduser
 
 from progressbar import Percentage
-from progressbar Bar
-from progressbar ETA
-from progressbar ProgressBar
-from progressbar AnimatedMarker
+from progressbar import Bar
+from progressbar import ETA
+from progressbar import ProgressBar
+from progressbar import AnimatedMarker
 
 #
 #
@@ -27,7 +27,7 @@ from progressbar AnimatedMarker
 
 
 HOME = expanduser('~')
-RCFILE = HOME + /.config/termcolors/
+RCFILE = HOME + '/.termcolorsrc'
 THEMEDIR = HOME + '/.config/termcolors/'
 
 
@@ -92,8 +92,8 @@ def get_themes(urls):
 if __name__ == '__main__':
     try:
         urls = {}
-        p = get_pages()
-        for i in p:
+        pages = get_pages()
+        for i in pages:
             tmp = get_urls(i.read())
             urls.update(tmp)
         
