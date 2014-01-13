@@ -1,6 +1,7 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 #
-# TODO: PyPI package
+# TODO: replace BeautifulSoup with re
 #
 
 import urllib
@@ -8,10 +9,28 @@ import sys
 
 from BeautifulSoup import BeautifulSoup
 from os.path import expanduser
-from progressbar import Percentage, Bar, ETA, ProgressBar, AnimatedMarker
+
+from progressbar import Percentage
+from progressbar Bar
+from progressbar ETA
+from progressbar ProgressBar
+from progressbar AnimatedMarker
+
+#
+#
+# check for .termcolorsrc, use defaults if not
+#
+# create directories
+#
+#
+
+
 
 HOME = expanduser('~')
+RCFILE = HOME + /.config/termcolors/
 THEMEDIR = HOME + '/.config/termcolors/'
+
+
 
 
 def get_pages():

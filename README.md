@@ -59,3 +59,5 @@ $ termcolors
     - auto format themefiles
     - adjust transparency setting in themefiles
     - PyPI
+    - LICENSE
+    

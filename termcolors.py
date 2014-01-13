@@ -1,4 +1,6 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 
 import os
 import re
@@ -7,16 +9,17 @@ import tempfile
 import subprocess
 
 from shutil import move
-from os.path import expanduser, exists
+from os.path import expanduser
+from os.path import exists
 
-home = expanduser('~')
-themefile = home + '/.termcolors'
-themedir = home + '/.config/termcolors'
+HOME = expanduser('~')
+SETTINGSFILE = HOME + '/.termcolors'
+THEMEDIR = HOME + '/.config/termcolors'
 
 def get_current():
     """return current Xresources color theme"""
-    if exists(themefile):
-        f = open(home + '/.termcolors').read()
+    if exists( SETTINGSFILE ):
+        f = open( HOME + '/.termcolors' ).read()
         current = re.findall('config[^\s]+', f)[0].split('/')[-1]
         return current
     else:
@@ -24,15 +27,15 @@ def get_current():
 
 def get_colors():
     """return list of  available Xresources color themes"""
-    if exists(themedir):
-        contents = os.listdir(themedir)
+    if exists( THEMEDIR ):
+        contents = os.listdir( THEMEDIR )
         themes = [theme for theme in contents if '.' not in theme]
         if len(themes) > 0:
             themes.sort()
             return themes
         else:
-            print "**No themes in themedir**"
-            sys.exi(0)
+            print "** No themes in themedir **"
+            sys.exit(0)
     else:
         print "** Theme directory not found **"
         print "First create ~/.config/xresources and place themefiles within."
@@ -68,28 +71,28 @@ def get_selection(colors):
 def write_changes(current, selection):
     fd, tmpfile = tempfile.mkstemp()
 
-    if exists(themefile):
-        old = open(home + '/.termcolors')
+    if exists( SETTINGSFILE ):
+        old = open( HOME + '/.termcolors' )
         new = os.fdopen(fd, 'w')
         for line in old:
             os.write(fd, line.replace(current, selection))
         old.close()
         new.close()
-        move(tmpfile, home + '/.termcolors')
+        move( tmpfile, HOME  + '/.termcolors' )
 
     else:
         new = os.fdopen(fd, 'w')
         os.write(fd, 'xrdb -load ~/.config/xresources/' + selection + '\n')
         os.write(fd, 'xrdb -merge ~/.Xresources\n')
         new.close()
-        move(tmpfile, home + '/.termcolors')
+        move( tmpfile, HOME + '/.termcolors' )
 
     #check for xrdb and apply
     proc = subprocess.Popen(["which", "xrdb"], stdout=subprocess.PIPE)
     tmp = proc.stdout.read()
 
     if len(tmp) > 0:
-        os.system('sh ~/.termcolors')
+        os.system('sh ' + SETTINGSFILE)
         print 'Changes applied.'
         print 'Restart terminal for changes to take effect.'
         return
