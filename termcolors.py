@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
 import os
 import re
 import sys
@@ -16,7 +15,6 @@ from os.path import exists
 HOME = expanduser('~')
 SETTINGSFILE = HOME + '/.termcolorsrc'
 THEMEDIR = HOME + '/.config/termcolors'
-RESULTS_PER_PAGE = 25
 
 def get_current():
     """return current Xresources color theme"""
@@ -37,21 +35,27 @@ def get_colors():
             return themes
         else:
             print "** No themes in themedir **"
+            print "    run:"
+            print "        termcolors (-s | --sync) <limit>"
             sys.exit(0)
     else:
         print "** Theme directory not found **"
-        print "First create ~/.config/xresources and place themefiles within."
+        print "    run: "
+        print "        termcolors --setup"
+
+
         sys.exit(0)
 
 
-def menu_pages(colors, page=1, print_keys=True):
+
+def menu_pages(colors, page=1, print_keys=True, results_per_page=25):
     """return menu items by page from list: colors"""
     c = os.system('clear')
     print '=' * 25
 
-    start = 25 * (page - 1)
+    start = results_per_page * (page - 1)
 
-    for i,v in enumerate(colors[start:start+25]):
+    for i,v in enumerate(colors[start:start+results_per_page]):
         print '%2d) %s' % (i+start+1, v)
     print '=' * 25
     print 'Current theme is: %s' % get_current()
@@ -66,20 +70,21 @@ def menu_pages(colors, page=1, print_keys=True):
         print keys
 
 
-def getch_selection(colors):
+
+def getch_selection(colors, results_per_page):
     """prompt for selection, validate input, return selection"""
     page = 1
     length = len(colors)
-    last_page = length / RESULTS_PER_PAGE
+    last_page = length / results_per_page
     
-    if (last_page * RESULTS_PER_PAGE) < length:
+    if (last_page * results_per_page) < length:
         last_page += 1
 
     getch = _Getch()
 
     valid = False
     while valid == False:
-        menu_pages(colors, page, True)
+        menu_pages(colors, page, True, results_per_page)
 
         char = getch()
         
@@ -87,7 +92,7 @@ def getch_selection(colors):
             page += 1
             if page > last_page:
                 page = last_page
-            menu_pages(colors, page, True)
+            menu_pages(colors, page, True, results_per_page)
 
 
         if( char.lower() == 'p' ):
@@ -95,7 +100,7 @@ def getch_selection(colors):
                 page -= 1
             else:
                 page = 1
-            menu_pages(colors, page, True)
+            menu_pages(colors, page, True, results_per_page)
 
 
         if( char.lower() == 's' ):
@@ -105,7 +110,7 @@ def getch_selection(colors):
                 if colors[entry - 1]:
                     valid = True
             except:
-                menu_pages(colors, page, True)
+                menu_pages(colors, page, True, results_per_page)
                 print "Not a valid integer."
 
         if( char.lower() == 'q' ):
@@ -115,44 +120,6 @@ def getch_selection(colors):
     return colors[entry - 1]
 
 
-def menu(colors):
-    """return menu items from list: colors """
-    c = os.system('clear')
-    print '=' * 25
-    for i,v in enumerate(colors):
-        print '%2d) %s' % (i+1, v)
-    print '=' * 25
-    print 'Current theme is: %s\n' % get_current()
-
-def get_selection(colors):
-    """prompt for selection, validate input, return selection"""
-    page = 1
-    menu_pages(colors, page)
-    valid = False
-    while valid == False:
-        entry = raw_input("Enter number of selection: ")
-        try:
-            entry = int(entry)
-            if colors[entry - 1]:
-                valid = True
-        except:
-            if type(entry) == type('str'):
-                if entry.lower() == 'q':
-                    c = os.system('clear')
-                    sys.exit(0)
-                elif entry.lower() == 'n':
-                    page += 1
-                    menu_pages(get_colors(), page)
-                elif entry.lower() == 'p':
-                    if page > 1:
-                        page -= 1
-                    else:
-                        page = 1
-                    menu_pages(get_colors(), page)
-                else:
-                    menu_pages(get_colors())
-                    print "Not a valid integer."
-    return colors[entry - 1]
 
 def write_changes(current, selection):
     fd, tmpfile = tempfile.mkstemp()
@@ -193,7 +160,7 @@ if __name__ == '__main__':
         colors = get_colors()
 
         current = get_current()
-        selection = getch_selection(colors)
+        selection = getch_selection(colors, 26)
         print selection
 #        write_changes(current, selection)
         

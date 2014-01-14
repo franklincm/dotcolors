@@ -35,6 +35,7 @@ def set_rcfile():
     if(exists( RCFILE )):
         return
     else:
+        print "~/.termcolorsrc not found, creating."
         outfile = open( RCFILE, 'w')
         outfile.write( TEXT )
         outfile.close()
@@ -54,6 +55,7 @@ def gset_themes_dir():
         if(isdir( themes_dir )):
             return themes_dir
         else:
+            print "creating themes directory at %s" % themes_dir
             makedirs( themes_dir )
             return themes_dir
 

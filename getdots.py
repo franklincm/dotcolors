@@ -16,21 +16,10 @@ from progressbar import ETA
 from progressbar import ProgressBar
 from progressbar import AnimatedMarker
 
-#
-#
-# check for .termcolorsrc, use defaults if not
-#
-# create directories
-#
-#
-
-
 
 HOME = expanduser('~')
 RCFILE = HOME + '/.termcolorsrc'
 THEMEDIR = HOME + '/.config/termcolors/'
-
-
 
 
 def get_pages():
@@ -52,30 +41,31 @@ def get_pages():
     return pages
 
 
-def get_urls(htmlDoc):
+def get_urls(htmlDoc, limit=200):
     '''takes in html document as string, returns links to dots'''
     soup = BeautifulSoup( htmlDoc )
     anchors = soup.findAll( 'a' )
     urls = {}
 
+    counter = 0
     for i,v in enumerate( anchors ):
         href = anchors[i].get( 'href' )
-        if 'dots' in href:
+        if 'dots' in href and counter <= limit:
             href = href.split('/')[2]
             text = anchors[i].text.split(' ')[0].replace('/', '_')
             urls[ text ] = href
+            counter += 1
     return urls
 
 
 def get_themes(urls):
     '''takes in dict of names and urls, downloads and saves files'''
     
-    length = len(urls)
     counter = 1
     widgets = ['Fetching themes: ', Percentage(), ' ', 
                Bar(marker='-'), ' ', ETA()]
 
-    pbar = ProgressBar( widgets=widgets, maxval=length ).start()
+    pbar = ProgressBar( widgets=widgets, maxval=len(urls) ).start()
 
     for i in urls.keys():
         href = 'http://dotshare.it/dots/%s/0/raw/' % urls[i]
@@ -89,16 +79,20 @@ def get_themes(urls):
     pbar.finish()
 
 
-if __name__ == '__main__':
+def run(limit=200):
     try:
         urls = {}
         pages = get_pages()
         for i in pages:
-            tmp = get_urls(i.read())
-            urls.update(tmp)
+            tmp = get_urls(i.read(), limit)
+            if len(urls) < limit:
+                urls.update(tmp)
         
         get_themes(urls)
     
     except KeyboardInterrupt:
         print "\n"
         sys.exit(0)
+
+if __name__ == '__main__':
+    run(limit)
