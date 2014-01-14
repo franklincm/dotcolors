@@ -49,12 +49,15 @@ def get_urls(htmlDoc, limit=200):
 
     counter = 0
     for i,v in enumerate( anchors ):
+
         href = anchors[i].get( 'href' )
-        if 'dots' in href and counter <= limit:
+
+        if ('dots' in href and counter < limit):
             href = href.split('/')[2]
             text = anchors[i].text.split(' ')[0].replace('/', '_')
             urls[ text ] = href
             counter += 1
+
     return urls
 
 
@@ -95,4 +98,4 @@ def run(limit=200):
         sys.exit(0)
 
 if __name__ == '__main__':
-    run(limit)
+    run(200)

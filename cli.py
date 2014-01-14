@@ -42,7 +42,7 @@ def main():
 
         
     if(options['--sync']):
-        getdots.run(options['<limit>'])
+        getdots.run(int(options['<limit>']))
 
         
     try:
