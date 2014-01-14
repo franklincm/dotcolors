@@ -7,10 +7,13 @@ import sys
 import tempfile
 import subprocess
 
-from getch import _Getch
+from utils import _Getch
+from utils import raw_input_with_default
 from shutil import move
 from os.path import expanduser
 from os.path import exists
+
+from StringIO import StringIO
 
 HOME = expanduser('~')
 SETTINGSFILE = HOME + '/.termcolorsrc'
@@ -48,77 +51,73 @@ def get_colors():
         sys.exit(0)
 
 
-def menu_pages(colors, page=1, print_keys=True, results_per_page=25):
+def menu_pages(colors, page=1, print_keys=True, per_page=15):
     """return menu items by page from list: colors"""
     c = os.system('clear')
     print '=' * 25
 
-    start = results_per_page * (page - 1)
+    start = per_page * (page - 1)
 
-    for i,v in enumerate(colors[start:start+results_per_page]):
-        print '%2d) %s' % (i+start+1, v)
-    print '=' * 25
+    for i,v in enumerate(colors[start : start + per_page]):
+        print '%2d) %s' % (i + start + 1, v)
+    print '=' * 30
     print 'Current theme is: %s' % get_current()
-    
+    print '=' * 30
+
     keys = """
-    N (n) - Next Page
-    P (p) - Previous Page
-    S (s) - Make Selection
-    Q (q) - Quit
+    (j/J) Next page,  (k/K) Previous page,  (Q)uit
+    Or simply enter the number of a theme
     """
     if(print_keys):
         print keys
 
 
-def getch_selection(colors, results_per_page):
+def getch_selection(colors, per_page=15):
     """prompt for selection, validate input, return selection"""
     page = 1
     length = len(colors)
-    last_page = length / results_per_page
+    last_page = length / per_page
     
-    if (last_page * results_per_page) < length:
+    if (last_page * per_page) < length:
         last_page += 1
 
     getch = _Getch()
 
     valid = False
     while valid == False:
-        menu_pages(colors, page, True, results_per_page)
+        menu_pages(colors, page, True, per_page)
 
         char = getch()
         
-        if( char.lower() == 'n' ):
+        try:
+            int(char)
+            entry = raw_input_with_default('Enter number of selection: ', char)
+            entry = int(entry)
+            if colors[entry - 1]:
+                valid = True
+
+        except ValueError:
+            pass
+
+        if( char.lower() == 'j' ):
             page += 1
             if page > last_page:
                 page = last_page
-            menu_pages(colors, page, True, results_per_page)
+            menu_pages(colors, page, True, per_page)
 
 
-        if( char.lower() == 'p' ):
+        if( char.lower() == 'k' ):
             if(page > 1):
                 page -= 1
             else:
                 page = 1
-            menu_pages(colors, page, True, results_per_page)
+            menu_pages(colors, page, True, per_page)
 
-
-        if( char.lower() == 's' ):
-            entry = raw_input("Enter number of selection: ")
-            try:
-                entry = int(entry)
-                if colors[entry - 1]:
-                    valid = True
-
-            except:
-                menu_pages(colors, page, True, results_per_page)
-                print "Not a valid integer."
-                raw_input()
 
         if( char.lower() == 'q' ):
             c = os.system('clear')
             sys.exit(0)
 
-    sys.stdout.flush()
     return colors[entry - 1]
 
 

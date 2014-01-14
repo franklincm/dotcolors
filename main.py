@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python2
 
 from docopt import docopt
 import sys
@@ -10,7 +10,9 @@ def main():
     usage = """
     
     Usage: 
-    termcolors ([-h] | [-s <limit>] [-r <results>] [-t])
+    termcolors [-h]
+    termcolors [-s] [(-r <per_page>)] [-t]
+    termcolors [(-s <limit>)] [(-r <per_page>)] [-t]
     termcolors [--setup]
     
     -h --help     Display this screen
@@ -30,6 +32,7 @@ def main():
     options = docopt(usage)
     #print options
     
+    
     # options = {'--help': False,
     #            '--results': False,
     #            '--setup': False,
@@ -45,18 +48,24 @@ def main():
 
         
     if(options['--sync']):
-        limit = options['<limit>']
+        limit = int(options['<limit>'])
         if type(limit) == type(None):
             limit = 200
         getdots.run(limit)
 
+
+    if(options['--results']):
+        results = int(options['<per_page>'])
         
+
     try:
         colors = termcolors.get_colors()
         current = termcolors.get_current()
-        selection = termcolors.getch_selection(colors, 25)
+
+        selection = termcolors.getch_selection(colors, results)
         print selection
-        termcolors.write_changes(current, selection, options['--test'])
+        termcolors.write_changes(current, selection, 
+                                 options['--test'])
 
     except KeyboardInterrupt:
         sys.exit(0)

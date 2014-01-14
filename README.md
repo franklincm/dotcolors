@@ -57,8 +57,7 @@ $ termcolors
 ```
 
 ### TODO: ###
-    - docopts
-    - limit number of themes downloaded
+    - show number of themes found/downloading: "Fetching theme (21/100)"
     - auto format themefiles
     - adjust transparency setting in themefiles
     - PyPI
