@@ -16,11 +16,12 @@ HOME = expanduser('~')
 SETTINGSFILE = HOME + '/.termcolorsrc'
 THEMEDIR = HOME + '/.config/termcolors'
 
+
 def get_current():
     """return current Xresources color theme"""
     if exists( SETTINGSFILE ):
-        f = open( HOME + '/.termcolors' ).read()
-        current = re.findall('config[^\s]+', f)[0].split('/')[-1]
+        f = open( SETTINGSFILE ).read()
+        current = re.findall('config[^\s]+.+', f)[1].split('/')[-1]
         return current
     else:
         return "** Not Set **"
@@ -47,7 +48,6 @@ def get_colors():
         sys.exit(0)
 
 
-
 def menu_pages(colors, page=1, print_keys=True, results_per_page=25):
     """return menu items by page from list: colors"""
     c = os.system('clear')
@@ -68,7 +68,6 @@ def menu_pages(colors, page=1, print_keys=True, results_per_page=25):
     """
     if(print_keys):
         print keys
-
 
 
 def getch_selection(colors, results_per_page):
@@ -109,43 +108,48 @@ def getch_selection(colors, results_per_page):
                 entry = int(entry)
                 if colors[entry - 1]:
                     valid = True
+
             except:
                 menu_pages(colors, page, True, results_per_page)
                 print "Not a valid integer."
+                raw_input()
 
         if( char.lower() == 'q' ):
             c = os.system('clear')
             sys.exit(0)
 
+    sys.stdout.flush()
     return colors[entry - 1]
 
 
+def write_changes(current, selection, test):
+    if test == False:
+        fd, tmpfile = tempfile.mkstemp()
 
-def write_changes(current, selection):
-    fd, tmpfile = tempfile.mkstemp()
+        if exists( SETTINGSFILE ):
+            old = open( SETTINGSFILE )
+            new = os.fdopen(fd, 'w')
+            for line in old:
+                os.write(fd, line.replace(current, selection))
+            old.close()
+            new.close()
+            move( tmpfile, SETTINGSFILE )
 
-    if exists( SETTINGSFILE ):
-        old = open( HOME + '/.termcolors' )
-        new = os.fdopen(fd, 'w')
-        for line in old:
-            os.write(fd, line.replace(current, selection))
-        old.close()
-        new.close()
-        move( tmpfile, HOME  + '/.termcolors' )
-
-    else:
-        new = os.fdopen(fd, 'w')
-        os.write(fd, 'xrdb -load ~/.config/xresources/' + selection + '\n')
-        os.write(fd, 'xrdb -merge ~/.Xresources\n')
-        new.close()
-        move( tmpfile, HOME + '/.termcolors' )
+        else:
+            new = os.fdopen(fd, 'w')
+            os.write(fd, 'xrdb -load ~/.config/xresources/' + selection + '\n')
+            os.write(fd, 'xrdb -merge ~/.Xresources\n')
+            new.close()
+            move( tmpfile, HOME + '/.termcolors' )
 
     #check for xrdb and apply
     proc = subprocess.Popen(["which", "xrdb"], stdout=subprocess.PIPE)
     tmp = proc.stdout.read()
 
     if len(tmp) > 0:
-        os.system('sh ' + SETTINGSFILE)
+        os.system('xrdb -load %s/%s' % (THEMEDIR, selection))
+        os.system('xrdb -merge %s/.Xresources' % HOME)
+        
         print 'Changes applied.'
         print 'Restart terminal for changes to take effect.'
         return

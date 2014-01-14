@@ -10,18 +10,20 @@ def main():
     usage = """
     
     Usage: 
-    termcolors ([-h] | [-s <limit>] [-r <results>])
+    termcolors ([-h] | [-s <limit>] [-r <results>] [-t])
     termcolors [--setup]
     
     -h --help     Display this screen
     
     -s --sync     Download themes, optionally limit the
-    number of themes downloaded with <limit>,
-    default=all
+                  number of themes downloaded with <limit>,
+                  default=all
+
+    --setup       create default directorie and config
     
     -r --results  Number of results to display per page
     
-    --setup       create default directorie and config
+    -t --test     Apply changes without writing to file
     
     """ 
     
@@ -32,6 +34,7 @@ def main():
     #            '--results': False,
     #            '--setup': False,
     #            '--sync': False,
+    #            '--test': False,
     #            '<limit>': None,
     #            '<results>': None}
     
@@ -42,7 +45,10 @@ def main():
 
         
     if(options['--sync']):
-        getdots.run(int(options['<limit>']))
+        limit = options['<limit>']
+        if type(limit) == type(None):
+            limit = 200
+        getdots.run(limit)
 
         
     try:
@@ -50,8 +56,8 @@ def main():
         current = termcolors.get_current()
         selection = termcolors.getch_selection(colors, 25)
         print selection
-        #write_changes(current, selection)
-            
+        termcolors.write_changes(current, selection, options['--test'])
+
     except KeyboardInterrupt:
         sys.exit(0)
             
