@@ -8,7 +8,6 @@ import getdots
 
 def main():
     usage = """
-    
     Usage: 
     termcolors [-h]
     termcolors [-s] [(-r <per_page>)] [-t]
@@ -46,24 +45,43 @@ def main():
         settings.set_rcfile()
         settings.gset_themes_dir()
 
-        
-    if(options['--sync']):
-        limit = int(options['<limit>'])
-        if type(limit) == type(None):
-            limit = 200
-        getdots.run(limit)
-
 
     if(options['--results']):
-        results = int(options['<per_page>'])
+
+        try:
+            results = int(options['<per_page>'])
+
+        except ValueError:
+            print "invalid argument"
+            print usage
+            sys.exit(0)
+    else:
+        results = 15
         
+    if(options['--sync']):
+        
+
+        try:
+            limit = int(options['<limit>'])
+        
+
+        except ValueError:
+            print "invalid argument"
+            print usage
+            sys.exit(0)
+            
+        except TypeError:
+            limit = 200
+        
+        getdots.run(limit)
+
 
     try:
         colors = core.get_colors()
         current = core.get_current()
 
         selection = core.getch_selection(colors, results)
-        print selection
+
         core.write_changes(current, selection, 
                                  options['--test'])
 

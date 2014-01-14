@@ -53,21 +53,34 @@ def get_colors():
 
 def menu_pages(colors, page=1, print_keys=True, per_page=15):
     """return menu items by page from list: colors"""
+
     c = os.system('clear')
-    print '=' * 25
+
+    length = len(colors)
+    last_page = length / per_page
+    if (last_page * per_page) < length:
+        last_page += 1
+
+    page_display = "page (%d/%d)" % (page, last_page)
 
     start = per_page * (page - 1)
 
+    keys = """
+(j/J) Next page,  (k/K) Previous page,  (Q)uit
+Or simply enter the number of a theme
+    """
+
+    print '=' * 30
+    print page_display
+    print '-' * len(page_display)
+
     for i,v in enumerate(colors[start : start + per_page]):
         print '%2d) %s' % (i + start + 1, v)
+
     print '=' * 30
     print 'Current theme is: %s' % get_current()
     print '=' * 30
 
-    keys = """
-    (j/J) Next page,  (k/K) Previous page,  (Q)uit
-    Or simply enter the number of a theme
-    """
     if(print_keys):
         print keys
 
@@ -80,18 +93,18 @@ def getch_selection(colors, per_page=15):
     
     if (last_page * per_page) < length:
         last_page += 1
-
+    
     getch = _Getch()
 
     valid = False
     while valid == False:
         menu_pages(colors, page, True, per_page)
-
+        sys.stdout.write(">")
         char = getch()
         
         try:
             int(char)
-            entry = raw_input_with_default('Enter number of selection: ', char)
+            entry = raw_input_with_default('Selection: ', char)
             entry = int(entry)
             if colors[entry - 1]:
                 valid = True

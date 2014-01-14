@@ -64,11 +64,12 @@ def get_urls(htmlDoc, limit=200):
 def get_themes(urls):
     '''takes in dict of names and urls, downloads and saves files'''
     
+    length = len(urls)
     counter = 1
-    widgets = ['Fetching themes: ', Percentage(), ' ', 
+    widgets = ['Fetching themes:', Percentage(), ' ', 
                Bar(marker='-'), ' ', ETA()]
 
-    pbar = ProgressBar( widgets=widgets, maxval=len(urls) ).start()
+    pbar = ProgressBar( widgets=widgets, maxval=length ).start()
 
     for i in urls.keys():
         href = 'http://dotshare.it/dots/%s/0/raw/' % urls[i]
