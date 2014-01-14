@@ -104,7 +104,7 @@ def getch_selection(colors, per_page=15):
         
         try:
             int(char)
-            entry = raw_input_with_default('Selection: ', char)
+            entry = raw_input_with_default(' Selection: ', char)
             entry = int(entry)
             if colors[entry - 1]:
                 valid = True

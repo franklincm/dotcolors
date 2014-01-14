@@ -14,17 +14,17 @@ def main():
     termcolors [(-s <limit>)] [(-r <per_page>)] [-t]
     termcolors [--setup]
     
-    -h --help     Display this screen
+    -h, --help     Display this screen
+
+    -r, --results  Number of results to display per page
     
-    -s --sync     Download themes, optionally limit the
+    -s, --sync     Download themes, optionally limit the
                   number of themes downloaded with <limit>,
                   default=all
 
     --setup       create default directorie and config
     
-    -r --results  Number of results to display per page
-    
-    -t --test     Apply changes without writing to file
+    -t, --test     Apply changes without writing to file
     
     """ 
     
