@@ -2,7 +2,7 @@
 
 from docopt import docopt
 import sys
-import termcolors
+import core
 import settings
 import getdots
 
@@ -59,17 +59,16 @@ def main():
         
 
     try:
-        colors = termcolors.get_colors()
-        current = termcolors.get_current()
+        colors = core.get_colors()
+        current = core.get_current()
 
-        selection = termcolors.getch_selection(colors, results)
+        selection = core.getch_selection(colors, results)
         print selection
-        termcolors.write_changes(current, selection, 
+        core.write_changes(current, selection, 
                                  options['--test'])
 
     except KeyboardInterrupt:
         sys.exit(0)
-            
             
             
 if __name__ == '__main__':
