@@ -29,5 +29,3 @@ complicated, will be packaged soon enough
     - auto format themefiles
     - adjust transparency setting in themefiles
     - PyPI
-    - LICENSE
-    
