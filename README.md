@@ -1,11 +1,11 @@
 # termcolors #
 
-## Setup ##
-complicated, will be packaged soon enough
+Simplifies managing Xresources colors.
 
 ## Usage ##
 ```
-    Usage: 
+    Usage: ./termcolors
+    
     termcolors [-h]
     termcolors [-s] [(-r <per_page>)] [-t]
     termcolors [(-s <limit>)] [(-r <per_page>)] [-t]
