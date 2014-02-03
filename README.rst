@@ -8,7 +8,7 @@ Simplifies managing Xresources colors.
 Usage
 =====
 
-.. code-block:: bash
+::
     Usage: dotcolors
 
     dotcolors [-h]
