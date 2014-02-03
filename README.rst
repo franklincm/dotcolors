@@ -8,25 +8,25 @@ Simplifies managing Xresources colors.
 Usage
 =====
 
-.. highlight:: bash
-    Usage: dotcolors
+.. code-block:: bash
+   Usage: dotcolors
 
-    dotcolors [-h]
-    dotcolors [-s] [(-r <per_page>)] [-t]
-    dotcolors [(-s <limit>)] [(-r <per_page>)] [-t]
-    dotcolors [--setup]
+   dotcolors [-h]
+   dotcolors [-s] [(-r <per_page>)] [-t]
+   dotcolors [(-s <limit>)] [(-r <per_page>)] [-t]
+   dotcolors [--setup]
 
-    -h --help     Display this screen
+   -h --help     Display this screen
 
-    -s --sync     Download themes, optionally limit the
+   -s --sync     Download themes, optionally limit the
                   number of themes downloaded with <limit>,
                   default=all
 
-    --setup       create default directorie and config
+   --setup       create default directorie and config
 
-    -r --results  Number of results to display per page
+   -r --results  Number of results to display per page
 
-    -t --test     Apply changes without writing to file
+   -t --test     Apply changes without writing to file
 
 
 =====
