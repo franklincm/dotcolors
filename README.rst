@@ -6,7 +6,8 @@ Simplifies managing Xresources colors.
 
 -----
 Usage
------::
+-----
+::
 
    Usage: dotcolors
 
