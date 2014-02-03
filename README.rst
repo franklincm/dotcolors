@@ -4,10 +4,9 @@ dotcolors
 
 Simplifies managing Xresources colors.
 
-=====
+-----
 Usage
-=====
-
+-----::
 
    Usage: dotcolors
 
@@ -27,7 +26,6 @@ Usage
    -r --results  Number of results to display per page
 
    -t --test     Apply changes without writing to file
-
 
 =====
 TODO
