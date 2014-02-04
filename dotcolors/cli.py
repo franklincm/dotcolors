@@ -1,4 +1,5 @@
-#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
 
 from docopt import docopt
 import sys
@@ -8,30 +9,30 @@ import getdots
 
 def main():
     usage = """
-    Usage: 
-    termcolors [-h]
-    termcolors [-s] [(-r <per_page>)] [-t]
-    termcolors [(-s <limit>)] [(-r <per_page>)] [-t]
-    termcolors [--setup]
-    
+    Usage:
+    dotcolors [-h]
+    dotcolors [-s] [(-r <per_page>)] [-t]
+    dotcolors [(-s <limit>)] [(-r <per_page>)] [-t]
+    dotcolors [--setup]
+
     -h, --help     Display this screen
 
     -r, --results  Number of results to display per page
-    
+
     -s, --sync     Download themes, optionally limit the
                   number of themes downloaded with <limit>,
                   default=all
 
     --setup       create default directorie and config
-    
+
     -t, --test     Apply changes without writing to file
-    
-    """ 
-    
+
+    """
+
     options = docopt(usage)
     #print options
-    
-    
+
+
     # options = {'--help': False,
     #            '--results': False,
     #            '--setup': False,
@@ -39,8 +40,8 @@ def main():
     #            '--test': False,
     #            '<limit>': None,
     #            '<results>': None}
-    
-    
+
+
     if(options['--setup']):
         settings.set_rcfile()
         settings.gset_themes_dir()
@@ -57,22 +58,22 @@ def main():
             sys.exit(0)
     else:
         results = 15
-        
+
     if(options['--sync']):
-        
+
 
         try:
             limit = int(options['<limit>'])
-        
+
 
         except ValueError:
             print "invalid argument"
             print usage
             sys.exit(0)
-            
+
         except TypeError:
             limit = 200
-        
+
         getdots.run(limit)
 
 
@@ -82,12 +83,12 @@ def main():
 
         selection = core.getch_selection(colors, results)
 
-        core.write_changes(current, selection, 
+        core.write_changes(current, selection,
                                  options['--test'])
 
     except KeyboardInterrupt:
         sys.exit(0)
-            
-            
+
+
 if __name__ == '__main__':
     main()

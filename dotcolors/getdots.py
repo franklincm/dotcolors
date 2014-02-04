@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # TODO: replace BeautifulSoup with re
@@ -18,8 +17,8 @@ from progressbar import AnimatedMarker
 
 
 HOME = expanduser('~')
-RCFILE = HOME + '/.termcolorsrc'
-THEMEDIR = HOME + '/.config/termcolors/'
+RCFILE = HOME + '/.dotcolorsrc'
+THEMEDIR = HOME + '/.config/dotcolors/'
 
 
 def get_pages():
@@ -63,10 +62,10 @@ def get_urls(htmlDoc, limit=200):
 
 def get_themes(urls):
     '''takes in dict of names and urls, downloads and saves files'''
-    
+
     length = len(urls)
     counter = 1
-    widgets = ['Fetching themes:', Percentage(), ' ', 
+    widgets = ['Fetching themes:', Percentage(), ' ',
                Bar(marker='-'), ' ', ETA()]
 
     pbar = ProgressBar( widgets=widgets, maxval=length ).start()
@@ -91,9 +90,9 @@ def run(limit=200):
             tmp = get_urls(i.read(), limit)
             if len(urls) < limit:
                 urls.update(tmp)
-        
+
         get_themes(urls)
-    
+
     except KeyboardInterrupt:
         print "\n"
         sys.exit(0)

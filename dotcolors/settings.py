@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from os import makedirs
@@ -10,23 +9,23 @@ from os.path import isdir
 import re
 
 HOME = expanduser('~')
-RCFILE = HOME + '/.termcolorsrc'
-#THEMEDIR = HOME + '/.config/termcolors/'
+RCFILE = HOME + '/.dotcolorsrc'
+#THEMEDIR = HOME + '/.config/dotcolors/'
 
 TEXT = """
 #!/bin/sh
 #
-# ~/.termcolorsrc
+# ~/.dotcolorsrc
 #
 # Add this to your .xinitrc or .xprofile:
 #
-#    sh ~/.termcolorsrc &
+#    sh ~/.dotcolorsrc &
 #
 
-termcolors_THEMEDIR='~/.config/termcolors/'
+dotcolors_THEMEDIR='~/.config/dotcolors/'
 
-xrdb -load ~/.config/termcolors/** Not Set **
-xrdb -merge ~/.Xresources 
+xrdb -load ~/.config/dotcolors/** Not Set **
+xrdb -merge ~/.Xresources
 
 """
 
@@ -35,7 +34,7 @@ def set_rcfile():
     if(exists( RCFILE )):
         return
     else:
-        print "~/.termcolorsrc not found, creating."
+        print "~/.dotcolorsrc not found, creating."
         outfile = open( RCFILE, 'w')
         outfile.write( TEXT )
         outfile.close()
@@ -43,13 +42,13 @@ def set_rcfile():
 def gset_themes_dir():
     if(exists( RCFILE )):
         infile = open( RCFILE ).read()
-        themes_dir = re.findall('termcolors_THEMEDIR[^\s]+', infile)[0].split("'")[1]
+        themes_dir = re.findall('dotcolors_THEMEDIR[^\s]+', infile)[0].split("'")[1]
         if( len(themes_dir) > 0 ):
             themes_dir = expanduser( themes_dir )
         else:
             print "Theme directory not set, using default:\n"
-            print "~/.config/termcolors/\n"
-            themes_dir = expanduser( "~/.config/termcolors/" )
+            print "~/.config/dotcolors/\n"
+            themes_dir = expanduser( "~/.config/dotcolors/" )
 
 
         if(isdir( themes_dir )):

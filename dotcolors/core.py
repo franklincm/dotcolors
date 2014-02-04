@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import os
@@ -16,8 +15,8 @@ from os.path import exists
 from StringIO import StringIO
 
 HOME = expanduser('~')
-SETTINGSFILE = HOME + '/.termcolorsrc'
-THEMEDIR = HOME + '/.config/termcolors'
+SETTINGSFILE = HOME + '/.dotcolorsrc'
+THEMEDIR = HOME + '/.config/dotcolors'
 
 
 def get_current():
@@ -40,12 +39,12 @@ def get_colors():
         else:
             print "** No themes in themedir **"
             print "    run:"
-            print "        termcolors (-s | --sync) <limit>"
+            print "        dotcolors (-s | --sync) <limit>"
             sys.exit(0)
     else:
         print "** Theme directory not found **"
         print "    run: "
-        print "        termcolors --setup"
+        print "        dotcolors --setup"
 
 
         sys.exit(0)
@@ -90,10 +89,10 @@ def getch_selection(colors, per_page=15):
     page = 1
     length = len(colors)
     last_page = length / per_page
-    
+
     if (last_page * per_page) < length:
         last_page += 1
-    
+
     getch = _Getch()
 
     valid = False
@@ -101,7 +100,7 @@ def getch_selection(colors, per_page=15):
         menu_pages(colors, page, True, per_page)
         sys.stdout.write(">")
         char = getch()
-        
+
         try:
             int(char)
             entry = raw_input_with_default(' Selection: ', char)
@@ -152,7 +151,7 @@ def write_changes(current, selection, test):
             os.write(fd, 'xrdb -load ~/.config/xresources/' + selection + '\n')
             os.write(fd, 'xrdb -merge ~/.Xresources\n')
             new.close()
-            move( tmpfile, HOME + '/.termcolors' )
+            move( tmpfile, HOME + '/.dotcolorsrc' )
 
     #check for xrdb and apply
     proc = subprocess.Popen(["which", "xrdb"], stdout=subprocess.PIPE)
@@ -161,16 +160,16 @@ def write_changes(current, selection, test):
     if len(tmp) > 0:
         os.system('xrdb -load %s/%s' % (THEMEDIR, selection))
         os.system('xrdb -merge %s/.Xresources' % HOME)
-        
+
         print 'Changes applied.'
         print 'Restart terminal for changes to take effect.'
         return
-        
+
     else:
         print '** \'xrdb\' Not Found **\n'
         print 'Install xrdb and try again\n'
 
-    
+
 if __name__ == '__main__':
     try:
         colors = get_colors()
@@ -179,6 +178,6 @@ if __name__ == '__main__':
         selection = getch_selection(colors, 26)
         print selection
 #        write_changes(current, selection)
-        
+
     except KeyboardInterrupt:
         sys.exit(0)

@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(name='dotcolors',
       version='0.1',
@@ -6,12 +6,16 @@ setup(name='dotcolors',
       url='http://github.com/jakhead/dotcolors',
       author='Chase Franklin',
       author_email='jakhead@gmail.com',
-      packages=['dotcolors'],
+      packages = ['dotcolors'],
+      py_modules = ['dotcolors'],
       license='MIT',
       install_requires=[
           'BeautifulSoup',
           'progressbar',
           'docopts'
           ],
-      scripts=['bin/dotcolors'],
-      zip_safe=False)
+      entry_points={
+          'console_scripts':
+          ['dotcolors = dotcolors.cli:main'
+       ]}
+     )
