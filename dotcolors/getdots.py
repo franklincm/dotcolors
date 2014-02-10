@@ -13,7 +13,6 @@ from progressbar import Percentage
 from progressbar import Bar
 from progressbar import ETA
 from progressbar import ProgressBar
-from progressbar import AnimatedMarker
 
 
 HOME = expanduser('~')
