@@ -7,7 +7,7 @@ Simplifies managing Xresources colors.
 -----
 Setup
 -----
-Put all global settings in ~/.Xresources (fonts, scrollbars, etc). The idea here is too separate global settings from color settings. So now dotcolors will first load settings from whichever theme file is selected, then merge global settings from ~/.Xresources. My ~/.Xresources looks like this:
+Put all global settings in ~/.Xresources (fonts, scrollbars, etc). The idea here is to separate global settings from color settings. So now dotcolors will first load settings from whichever theme file is selected, then merge global settings from ~/.Xresources. My ~/.Xresources looks like this:
 
 ::
 
@@ -62,6 +62,6 @@ Usage
 =====
 TODO
 =====
+* cleanup / rewrite
 * show number of themes found/downloading: "Fetching theme (21/100)"
-* auto format themefiles
-* adjust transparency setting in themefiles
+
