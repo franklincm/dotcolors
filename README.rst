@@ -63,6 +63,7 @@ Usage
 The interface should be pretty self explanatory except for maybe prefix. The prefix is what gets prepended to a couple lines in ~/.Xresrouces i.e.:
 
 ::
+
    urxvt.depth:        32
    urxvt.background:   rgba:0000/0000/0000/bfff
 
