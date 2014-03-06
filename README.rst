@@ -59,6 +59,15 @@ Usage
 
    -t --test     Apply changes without writing to file
 
+
+The interface should be pretty self explanatory except for maybe prefix. The prefix is what gets prepended to a couple lines in ~/.Xresrouces i.e.:
+
+::
+   urxvt.depth:        32
+   urxvt.background:   rgba:0000/0000/0000/bfff
+
+The default is 'urxvt', and it can easily be changed but I haven't tested any other terms/values except urxvt. If it doesn't work, let me know. Feedback is appreciated.
+
 =====
 TODO
 =====
