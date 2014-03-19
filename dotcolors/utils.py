@@ -84,7 +84,10 @@ def decimal_to_alpha(dec):
     returns: alpha value for rgba
     """
     dec /= 100.0
-    return hex(int(dec*65535))[2:]
+    alpha =  hex(int(dec*65535))[2:]
+    while len(alpha) < 4:
+        alpha = '0' + alpha
+    return alpha
 
 
 if __name__ == '__main__':
