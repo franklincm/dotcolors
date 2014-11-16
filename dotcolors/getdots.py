@@ -6,7 +6,7 @@
 import urllib
 import sys
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 from os.path import expanduser
 
 from progressbar import Percentage

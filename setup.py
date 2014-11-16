@@ -10,7 +10,7 @@ setup(name='dotcolors',
       py_modules = ['dotcolors'],
       license='MIT',
       install_requires=[
-          'BeautifulSoup',
+          'beautifulsoup4>=4.3.2',
           'progressbar',
           'docopts'
           ],
