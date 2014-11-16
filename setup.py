@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='dotcolors',
-      version='0.3',
+      version='0.4',
       description='manage Xresources colors from dotshare.it',
       url='http://github.com/jakhead/dotcolors',
       author='Chase Franklin',
